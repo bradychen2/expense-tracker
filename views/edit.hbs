@@ -1,0 +1,62 @@
+<div class="fluid-container row justify-content-center">
+  <div class="w-75 row justify-content-center">
+    <div class="col-7 m-0 p-0 d-flex justify-content-evenly">
+      <div class="">
+        *必填欄位
+      </div>
+      <h1 class="mx-3">
+        請修改支出細項
+      </h1>
+    </div>
+  </div>
+
+  <form action="/records/{{record._id}}/?_method=PUT" method="POST" class="w-75 row justify-content-center">
+    <div class="col-md-8 d-flex justify-content-evenly my-3">
+      <label for="name" class="col-form-label mx-0">名稱*:</label>
+      <div class="mx-3 w-50">
+        <input type="text" size="" class="form-control" id="name" name="name" value={{record.name}}>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-evenly mb-3">
+      <label for="date" class="col-form-label mx-0">日期*:</label>
+      <div class="mx-3 w-50">
+        <input type="date" class="form-control" id="date" name="date" value={{formatTime record.date}}>
+      </div>
+    </div>
+
+    <div class="col-md-6 d-flex justify-content-between mb-3 px-2 mx-0">
+      <label class="col-form-label w-25 mx-0" for="inputGroupSelect">類別*:</label>
+      <div class="mx-3 w-75">
+        <select class="form-select" name="category" id="inputGroupSelect">
+          <option {{judgeCategory record.category "housing" }} value="housing">
+            家庭物業
+          </option>
+          <option {{judgeCategory record.category "transportation" }} value="transportation">
+            交通出行
+          </option>
+          <option {{judgeCategory record.category "entertainment" }} value="entertainment">
+            休閒娛樂
+          </option>
+          <option {{judgeCategory record.category "food" }} value="food">
+            餐飲食品
+          </option>
+          <option {{judgeCategory record.category "other" }} value="other">
+            其他
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-evenly mb-3">
+      <label for="amount" class="col-form-label mx-0">金額*:</label>
+      <div class="mx-3 w-50">
+        <input type="number" size="" class="form-control" id="amount" name="amount" value={{record.amount}}>
+      </div>
+    </div>
+
+    <p class="col-md-8 d-flex justify-content-evenly">
+      <button type="submit" class="btn btn-">新增支出</button>
+    </p>
+  </form>
+</div>

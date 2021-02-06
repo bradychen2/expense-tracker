@@ -1,6 +1,6 @@
-<div class="container">
+<div class="fluid-container row justify-content-center">
   {{!-- Dropdown List --}}
-  <div class="dropdown-container row justify-content-center">
+  {{!-- <div class="dropdown-container row justify-content-center">
     <div class="dropdown col-6 p-0">
       <a class="btn dropdown-toggle w-75 p-0" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
         data-bs-reference="parent" aria-expanded="false">
@@ -13,11 +13,30 @@
         <li><a class="dropdown-item" href="#">Something else here</a></li>
       </ul>
     </div>
+  </div> --}}
+  <div class="dropdown-container col-6 px-1 mx-1 row justify-content-start">
+    {{!-- <div class="col-6 p-0"> --}}
+      <div class="btn-group col-9 p-0 mx-0 d-flex justify-content-between">
+        <button type="button" class="btn px-0 w-75 text-start">請選擇類別</button>
+        <button type="button" class="btn btn-sm px-0 text-center dropdown-toggle dropdown-toggle-split"
+          id="dropdownMenuReference" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+          <span class="visually-hidden text-end">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuReference">
+          <li><a class="dropdown-item" href="#" value="housing">家庭物業</a></li>
+          <li><a class="dropdown-item" href="#" value="transportation">交通出行</a></li>
+          <li><a class="dropdown-item" href="#" value="entertainment">休閒娛樂</a></li>
+          <li><a class="dropdown-item" href="#" value="food">餐飲食品</a></li>
+          <li><a class="dropdown-item" href="#" value="other">其他</a></li>
+        </ul>
+      </div>
+      {{!--
+    </div> --}}
   </div>
 
   {{!-- Total Amount --}}
   <div class="row justify-content-center">
-    <div class="col-6 m-0 p-0 d-flex justify-content-start">
+    <div class="col-6 mx-0 px-0 d-flex justify-content-start">
       <div class="">
         總金額:
       </div>
@@ -35,7 +54,7 @@
         <div class="col-12 d-flex flex-nowrap justify-content-between">
           <li class="list-group-item w-75 d-flex justify-content-between">
             <div class="d-flex">
-              <i class="fas fa-utensils"></i>
+              <i class="fas fa-utensils fs-2"></i>
               <div>
                 <div class="">
                   {{this.name}}
@@ -50,8 +69,8 @@
             </div>
           </li>
           <div>
-            <button>修改</button>
-            <form action="/{{this._id}}/?_method=DELETE" method="POST">
+            <a class="btn" href="/records/edit/{{this._id}}">修改</a>
+            <form action="/records/{{this._id}}/?_method=DELETE" method="POST">
               <button>刪除</button>
             </form>
           </div>
