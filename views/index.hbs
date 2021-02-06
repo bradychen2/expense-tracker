@@ -1,9 +1,10 @@
-<div class="container mt-10">
-  <div class="row justify-content-center">
-    <div class="dropdown col-6">
-      <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+<div class="container">
+  {{!-- Dropdown List --}}
+  <div class="dropdown-container row justify-content-center">
+    <div class="dropdown col-6 p-0">
+      <a class="btn dropdown-toggle w-75 p-0" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
         data-bs-reference="parent" aria-expanded="false">
-        Dropdown link
+        類別
       </a>
 
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -13,19 +14,50 @@
       </ul>
     </div>
   </div>
+
+  {{!-- Total Amount --}}
   <div class="row justify-content-center">
-    <div class="col-6">
-      <ul class="list-group">
-        <div class="d-flex justify-content-between">
-          <li class="list-group-item">
-            午餐
+    <div class="col-6 m-0 p-0 d-flex justify-content-start">
+      <div class="">
+        總金額:
+      </div>
+      <h1 class="mx-3">
+        25260
+      </h1>
+    </div>
+  </div>
+
+  {{!-- Record List --}}
+  <div class="row justify-content-center">
+    <ul class="list-group col-6 d-flex flex-row justify-content-between">
+      <div class="row justify-content-between">
+        {{#each records}}
+        <div class="col-12 d-flex flex-nowrap justify-content-between">
+          <li class="list-group-item w-75 d-flex justify-content-between">
+            <div class="d-flex">
+              <i class="fas fa-utensils"></i>
+              <div>
+                <div class="">
+                  {{this.name}}
+                </div>
+                <div class="h-25">
+                  {{formatTime this.date}}
+                </div>
+              </div>
+            </div>
+            <div>
+              {{this.amount}}
+            </div>
           </li>
           <div>
             <button>修改</button>
-            <button>刪除</button>
+            <form action="/{{this._id}}/?_method=DELETE" method="POST">
+              <button>刪除</button>
+            </form>
           </div>
         </div>
-      </ul>
-    </div>
+        {{/each}}
+      </div>
+    </ul>
   </div>
 </div>
