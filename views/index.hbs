@@ -8,11 +8,24 @@
         <span class="visually-hidden text-end">Toggle Dropdown</span>
       </button>
       <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuReference">
-        <li><a class="dropdown-item" href="#" value="housing">家庭物業</a></li>
-        <li><a class="dropdown-item" href="#" value="transportation">交通出行</a></li>
-        <li><a class="dropdown-item" href="#" value="entertainment">休閒娛樂</a></li>
-        <li><a class="dropdown-item" href="#" value="food">餐飲食品</a></li>
-        <li><a class="dropdown-item" href="#" value="other">其他</a></li>
+        <li><a class="dropdown-item" href="/">
+            所有類型
+          </a></li>
+        <li><a class="dropdown-item" href="/records/filter/housing" value="housing">
+            家庭物業
+          </a></li>
+        <li><a class="dropdown-item" href="/records/filter/transportation" value="transportation">
+            交通出行
+          </a></li>
+        <li><a class="dropdown-item" href="/records/filter/entertainment" value="entertainment">
+            休閒娛樂
+          </a></li>
+        <li><a class="dropdown-item" href="/records/filter/food" value="food">
+            餐飲食品
+          </a></li>
+        <li><a class="dropdown-item" href="/records/filter/other" value="other">
+            其他
+          </a></li>
       </ul>
     </div>
   </div>
@@ -24,7 +37,7 @@
         總金額:
       </div>
       <h1 class="mx-3">
-        25260
+        {{totalAmount}}
       </h1>
     </div>
   </div>
@@ -32,7 +45,7 @@
   {{!-- Record List --}}
   <div class="row justify-content-center">
     <ul class="list-group col-6 d-flex flex-row justify-content-between">
-      <div class="row justify-content-between">
+      <div class="w-100 row justify-content-between">
         {{#each records}}
         <div class="col-12 d-flex flex-nowrap justify-content-between">
           <li class="list-group-item w-75 d-flex justify-content-between">

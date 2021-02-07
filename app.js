@@ -25,7 +25,14 @@ app.get('/', (req, res) => {
   return Record.find()
     .lean()
     .sort({ date: 'desc' })
-    .then(records => res.render('index', { records }))
+    .then(records => {
+      let totalAmount = 0
+      for (record of records) {
+        totalAmount += record.amount
+      }
+      res.render('index', { records: records, totalAmount })
+
+    })
     .catch(error => console.log(error))
 })
 
@@ -87,6 +94,21 @@ app.put('/records/:id', [
         }
       })
   })
+
+// Filter by category
+app.get('/records/filter/:category', (req, res) => {
+  const category = req.params.category
+  return Record.find({ category: `${category}` })
+    .lean()
+    .sort({ date: 'desc' })
+    .then(records => {
+      let totalAmount = 0
+      for (record of records) {
+        totalAmount += record.amount
+      }
+      res.render('index', { records, totalAmount })
+    })
+})
 
 // Delete record
 app.delete('/records/:id', (req, res) => {
