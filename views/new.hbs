@@ -1,0 +1,70 @@
+<div class="fluid-container row justify-content-center">
+  <div class="w-75 row justify-content-center">
+    <div class="col-7 m-0 p-0 d-flex justify-content-evenly">
+      <div class="">
+        *必填欄位
+      </div>
+      <h1 class="mx-3">
+        請輸入你的支出
+      </h1>
+    </div>
+  </div>
+
+  <form action="/records" method="POST" class="w-75 row justify-content-center">
+    <div class="col-md-8 d-flex justify-content-evenly my-3">
+      <label for="name" class="col-form-label mx-0">名稱*:</label>
+      <div class="mx-3 w-50">
+        <input type="text" size="" class="form-control" id="name" name="name" {{#if
+          record.name}}value={{record.name}}{{/if}}>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-evenly mb-3">
+      <label for="date" class="col-form-label mx-0">日期*:</label>
+      <div class="mx-3 w-50">
+        <input type="date" class="form-control" id="date" name="date" {{#if record.date}}value={{formatTime
+          record.date}}{{/if}}>
+      </div>
+    </div>
+
+    <div class="col-md-6 d-flex justify-content-between mb-3 px-2 mx-0">
+      <label class="col-form-label w-25 mx-0" for="inputGroupSelect">類別*:</label>
+      <div class="mx-3 w-75">
+        <select class="form-select" name="category" id="inputGroupSelect">
+          <option selected>
+            Selected
+          </option>
+          <option {{#if record.category}}{{judgeCategory record.category "housing" }}{{/if}} value="housing">
+            家庭物業
+          </option>
+          <option {{#if record.category}}{{judgeCategory record.category "transportation" }}{{/if}}
+            value="transportation">
+            交通出行
+          </option>
+          <option {{#if record.category}}{{judgeCategory record.category "entertainment" }}{{/if}}
+            value="entertainment">
+            休閒娛樂
+          </option>
+          <option {{#if record.category}}{{judgeCategory record.category "food" }}{{/if}} value="food">
+            餐飲食品
+          </option>
+          <option {{#if record.category}}{{judgeCategory record.category "other" }}{{/if}} value="other">
+            其他
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-evenly mb-3">
+      <label for="amount" class="col-form-label mx-0">金額*:</label>
+      <div class="mx-3 w-50">
+        <input type="number" size="" class="form-control" id="amount" name="amount" {{#if
+          record.amount}}value={{record.amount}}{{/if}}>
+      </div>
+    </div>
+
+    <p class="col-md-8 d-flex justify-content-evenly">
+      <button type="submit" class="btn btn-primary">新增支出</button>
+    </p>
+  </form>
+</div>
