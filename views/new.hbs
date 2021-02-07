@@ -16,6 +16,11 @@
       <div class="mx-3 w-50">
         <input type="text" size="" class="form-control" id="name" name="name" {{#if
           record.name}}value={{record.name}}{{/if}}>
+        {{#if errorResult.errors.name}}
+        <div class="warning">
+          {{errorResult.errors.name.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 
@@ -24,6 +29,11 @@
       <div class="mx-3 w-50">
         <input type="date" class="form-control" id="date" name="date" {{#if record.date}}value={{formatTime
           record.date}}{{/if}}>
+        {{#if errorResult.errors.date}}
+        <div class="warning">
+          {{errorResult.errors.date.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 
@@ -52,6 +62,11 @@
             其他
           </option>
         </select>
+        {{#if errorResult.errors.category}}
+        <div class="warning">
+          {{errorResult.errors.category.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 
@@ -60,6 +75,11 @@
       <div class="mx-3 w-50">
         <input type="number" size="" class="form-control" id="amount" name="amount" {{#if
           record.amount}}value={{record.amount}}{{/if}}>
+        {{#if errorResult.errors.amount}}
+        <div class="warning">
+          {{errorResult.errors.amount.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 

@@ -14,14 +14,26 @@
     <div class="col-md-8 d-flex justify-content-evenly my-3">
       <label for="name" class="col-form-label mx-0">名稱*:</label>
       <div class="mx-3 w-50">
-        <input type="text" size="" class="form-control" id="name" name="name" value={{record.name}}>
+        <input type="text" size="" class="form-control" id="name" name="name" {{#if
+          record.name}}value={{record.name}}{{/if}}>
+        {{#if errorResult.errors.name}}
+        <div class="warning">
+          {{errorResult.errors.name.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 
     <div class="col-md-8 d-flex justify-content-evenly mb-3">
       <label for="date" class="col-form-label mx-0">日期*:</label>
       <div class="mx-3 w-50">
-        <input type="date" class="form-control" id="date" name="date" value={{formatTime record.date}}>
+        <input type="date" class="form-control" id="date" name="date" {{#if record.date}}value={{formatTime
+          record.date}}{{/if}}>
+        {{#if errorResult.errors.date}}
+        <div class="warning">
+          {{errorResult.errors.date.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 
@@ -51,7 +63,13 @@
     <div class="col-md-8 d-flex justify-content-evenly mb-3">
       <label for="amount" class="col-form-label mx-0">金額*:</label>
       <div class="mx-3 w-50">
-        <input type="number" size="" class="form-control" id="amount" name="amount" value={{record.amount}}>
+        <input type="number" size="" class="form-control" id="amount" name="amount" {{#if
+          record.amount}}value={{record.amount}}{{/if}}>
+        {{#if errorResult.errors.amount}}
+        <div class="warning">
+          {{errorResult.errors.amount.msg}}
+        </div>
+        {{/if}}
       </div>
     </div>
 
