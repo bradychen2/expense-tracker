@@ -1,3 +1,62 @@
-.dropdown-container {
-  margin-top: 10px !important;
+html {
+    background-color: #e8f4f3;
+}
+
+.main-container {
+  background-color: #e8f4f3;
+}
+
+label {
+  font-weight: bold;
+}
+
+.reminder {
+  font-weight: bold;
+}
+
+.housing {
+  background-color: #8DC5A4 !important;
+}
+
+.transportation {
+  background-color: #e7d46a !important;
+}
+
+.entertainment {
+  background-color:#8ac5d2 !important; 
+}
+
+.food {
+  background-color: #fbc0a6 !important;
+}
+
+.other {
+  background-color: #C3CACF !important;
+}
+
+.list-group-item {
+  border-color: black !important;
+  font-weight: bold;
+}
+
+.list-group-item:hover {
+  box-shadow: 2px 2px 4px #000000 !important;
+  cursor: pointer;
+}
+
+.list-item-link {
+  all: unset;
+  color: black !important;
+}
+
+#date-display {
+  font-size: xx-small !important;
+}
+
+.warning {
+  color: red;
+}
+
+.total-amount {
+  font-weight: bolder !important;
 }

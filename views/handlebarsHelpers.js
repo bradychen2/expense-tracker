@@ -17,3 +17,18 @@ Handlebars.registerHelper('judgeCategory', function (recordCategory, currCategor
   }
   return
 })
+
+Handlebars.registerHelper('displayIcon', function (record) {
+  if (record.category === 'housing') {
+    return `<i class="fas fa-home fs-2"></i>`
+  } else if (record.category === 'transportation') {
+    return `<i class="fas fa-shuttle-van fs-2"></i>`
+  } else if (record.category === 'entertainment') {
+    return `<i class="fas fa-grin-beam fs-2 mx-1"></i>`
+  } else if (record.category === 'food') {
+    return `<i class="fas fa-utensils fs-2 mx-1"></i>`
+  } else {
+    return `<i class="fas fa-pen fs-2 mx-1"></i>`
+  }
+})
+
