@@ -44,34 +44,31 @@
 
   {{!-- Record List --}}
   <div class="row justify-content-center">
-    <ul class="list-group col-6 d-flex flex-row justify-content-between">
-      <div class="w-100 row justify-content-between">
-        {{#each records}}
-        <div class="col-12 d-flex flex-nowrap justify-content-between list-item-container">
-          <li class="list-group-item w-75 my-1 {{this.category}}">
-            <a class="list-item-link d-flex align-items-center justify-content-between"
-              href="/records/edit/{{this._id}}">
-              <div class="d-flex align-items-center justify-content-evenly">
-                {{{displayIcon this}}}
-                <div class="mx-2">
-                  <div class="">{{this.name}}</div>
-                  <div class="" id="date-display">{{formatTime this.date}}</div>
-                </div>
+    <ul class="list-group row col-md-6 d-flex flex-row justify-content-center">
+      {{#each records}}
+      <div class="col-sm-10 col-md-12 d-flex flex-nowrap justify-content-center list-item-container">
+        <li class="list-group-item w-75 my-1 {{this.category}}">
+          <a class="list-item-link d-flex align-items-center justify-content-between" href="/records/edit/{{this._id}}">
+            <div class="d-flex align-items-center justify-content-evenly">
+              {{{displayIcon this}}}
+              <div class="mx-2">
+                <div class="">{{this.name}}</div>
+                <div class="" id="date-display">{{formatTime this.date}}</div>
               </div>
-              <div>
-                {{this.amount}}
-              </div>
-            </a>
-          </li>
-          <div>
-            <a class="btn btn-success btn-sm" href="/records/edit/{{this._id}}">修改</a>
+            </div>
+            <div>
+              {{this.amount}}
+            </div>
+          </a>
+          <div class="d-flex justify-content-end button-group">
+            <a class="btn btn-success btn-sm mx-1 my-1" href="/records/edit/{{this._id}}">修改</a>
             <form action="/records/{{this._id}}/?_method=DELETE" method="POST">
               <button class="btn btn-danger btn-sm my-1">刪除</button>
             </form>
           </div>
-        </div>
-        {{/each}}
+        </li>
       </div>
+      {{/each}}
     </ul>
   </div>
   {{!-- Create new record --}}
