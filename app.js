@@ -19,7 +19,6 @@ app.engine('hbs', exphbs({
 }))
 app.set('view engine', 'hbs')
 
-// Set static files
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(session({
