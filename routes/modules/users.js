@@ -3,7 +3,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 
 router.get('/login', (req, res) => {
-  res.send('Login')
+  res.render('login')
 })
 
 router.post('/login', (req, res) => {
@@ -11,7 +11,7 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/register', (req, res) => {
-  res.send('Register')
+  res.render('register')
 })
 
 router.post('/register', (req, res) => {
