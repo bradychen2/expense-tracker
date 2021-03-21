@@ -16,7 +16,9 @@ router.post('/', [
   check('amount').notEmpty().withMessage('金額為必填欄位!')
 ]
   , (req, res) => {
-    const record = req.body
+    const userId = req.user._id
+    let record = req.body
+    record.userId = userId
     const errors = validationResult(req)
     return Record.create(record)
       .then(() => res.redirect('/'))
@@ -30,8 +32,9 @@ router.post('/', [
 
 // Go to edit page
 router.get('/edit/:id', (req, res) => {
-  const id = req.params.id
-  return Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Record.findOne({ userId, _id })
     .lean()
     .then(record => res.render('edit', { record }))
     .catch(error => { console.log(error) })
@@ -44,9 +47,10 @@ router.put('/:id', [
   check('amount').notEmpty().withMessage('金額為必填欄位!')
 ]
   , (req, res) => {
-    const id = req.params.id
+    const userId = req.user._id
+    const _id = req.params.id
     const errors = validationResult(req)
-    return Record.findById(id)
+    return Record.findOne({ userId, _id })
       .then(record => {
         record = Object.assign(record, req.body)
         return record.save()
@@ -64,8 +68,9 @@ router.put('/:id', [
 
 // Filter by category
 router.get('/filter/:category', (req, res) => {
+  const userId = req.user._id
   const category = req.params.category
-  return Record.find({ category: `${category}` })
+  return Record.find({ category, userId })
     .lean()
     .sort({ date: 'desc' })
     .then(records => {
@@ -79,8 +84,9 @@ router.get('/filter/:category', (req, res) => {
 
 // Delete record
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  return Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  return Record.findOne({ userId, _id })
     .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
