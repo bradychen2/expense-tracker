@@ -4,13 +4,16 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 const usePassport = require('./config/passport')
 const routes = require('./routes')
 require('./config/mongoose')
 
 // Set require const for server
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 // Set template engine
 app.engine('hbs', exphbs({
@@ -24,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(flash())
 app.use(session({
-  secret: 'ExtremeSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))

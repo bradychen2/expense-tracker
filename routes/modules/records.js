@@ -122,7 +122,7 @@ router.post('/filter', (req, res) => {
     // {property1: true, property2: true, ...}
     projectCondition[path] = 1
   })
-  console.log(filterCondition)
+
   return Record
     .aggregate([
       { $project: projectCondition },

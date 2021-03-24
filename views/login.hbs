@@ -1,19 +1,21 @@
 <div class="row mt-5 main-container">
-  <div class="col-md-4 m-auto">
+  <div class="col-8 col-md-6 col-lg-5 m-auto">
     <div class="card card-body">
       <h1 class="text-center mt-3">登入我的家庭帳本</h1>
       <form action="/users/login" method="POST">
         {{> message}}
-        <div class="form-group">
+        <div class="form-group my-2">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
         </div>
-        <div class="form-group">
+        <div class="form-group my-2">
           <label for="password">密碼</label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
         </div>
-        <button type="submit" class="btn btn-info btn-block">登入</button>
-        <a href="/auth/facebook" class="btn btn-primary btn-block">Facebook 登入</a>
+        <div class="row">
+          <button type="submit" class="btn btn-info btn-block my-1">登入</button>
+          <a href="/auth/facebook" class="btn btn-primary btn-block my-1">Facebook 登入</a>
+        </div>
       </form>
       <p class="lead mt-4">
         沒有帳號? <a href="/users/register">註冊</a>
