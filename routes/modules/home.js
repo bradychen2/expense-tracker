@@ -13,8 +13,9 @@ router.get('/', (req, res) => {
       for (record of records) {
         totalAmount += record.amount
       }
-      res.render('index', { records: records, totalAmount })
 
+      req.session.records = records
+      res.render('index', { records, totalAmount })
     })
     .catch(error => console.log(error))
 })

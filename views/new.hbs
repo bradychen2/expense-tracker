@@ -37,9 +37,9 @@
       </div>
     </div>
 
-    <div class="col-md-6 d-flex justify-content-between mb-3 px-2 mx-0">
-      <label class="col-form-label w-25 mx-0" for="inputGroupSelect">類別*:</label>
-      <div class="mx-3 w-75">
+    <div class="col-md-8 d-flex justify-content-evenly mb-3 px-2 mx-0">
+      <label class="col-form-label mx-0" for="inputGroupSelect">類別*:</label>
+      <div class="mx-3 w-50">
         <select class="form-select" name="category" id="inputGroupSelect">
           <option selected>
             Selected
@@ -71,6 +71,14 @@
     </div>
 
     <div class="col-md-8 d-flex justify-content-evenly mb-3">
+      <label for="merchant" class="col-form-label mx-0">商家:</label>
+      <div class="mx-3 w-50">
+        <input type="text" size="" class="form-control" id="merchant" name="merchant" {{#if
+          record.merchant}}value={{record.merchant}}{{/if}}>
+      </div>
+    </div>
+
+    <div class="col-md-8 d-flex justify-content-evenly mb-3">
       <label for="amount" class="col-form-label mx-0">金額*:</label>
       <div class="mx-3 w-50">
         <input type="number" size="" class="form-control" id="amount" name="amount" {{#if
@@ -83,9 +91,9 @@
       </div>
     </div>
 
-    <p class="col-md-8 d-flex justify-content-evenly">
-      <button type="submit" class="btn btn-primary">新增支出</button>
-      <a href="/" class="btn btn-secondary">返回</a>
+    <p class="col-md-8 d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary mx-4">新增支出</button>
+      <a href="/records/back" class="btn btn-secondary mx-4">返回</a>
     </p>
   </form>
 </div>

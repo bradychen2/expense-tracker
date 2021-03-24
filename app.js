@@ -35,6 +35,9 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.year = req.session.year
+  res.locals.month = req.session.month
+  res.locals.category = req.session.category
   next()
 })
 app.use(routes)
