@@ -22,6 +22,7 @@ Handlebars.registerHelper('generateYear', function (records, inputYear) {
   }
 
   yearList.sort()
+
   let yearOptions = ''
   if (!inputYear) {
     yearOptions += '<option value="" selected>請選擇年分</option>'
@@ -44,14 +45,13 @@ Handlebars.registerHelper('generateMonth', function (records, inputMonth) {
   for (let record of records) {
     let date = new Date(record.date)
     let month = date.getMonth() + 1
-    if (!monthList.includes(month)) {
-      monthList.push(month)
+    if (!monthList.includes(Number(month))) {
+      monthList.push(Number(month))
     }
   }
 
-  monthList.sort()
+  monthList.sort((a, b) => a - b)
 
-  monthList.sort()
   let monthOptions = ''
   if (!inputMonth) {
     monthOptions += '<option value="" selected>請選擇月份</option>'
