@@ -76,7 +76,8 @@ router.put('/:id', [
         record = record.toObject()
 
         for (let item of records) {
-          // Types of _id are not the same
+          // record in session.records is old information
+          // so need to insert updated record to records 
           if (item._id == record._id) {
             records[records.indexOf(item)] = record
           }
@@ -159,13 +160,6 @@ router.delete('/:id', (req, res) => {
       res.render('index', { records, totalAmount })
     })
     .catch(error => console.log(error))
-})
-
-// Cancel from edit or new
-router.get('/back', (req, res) => {
-  const records = req.session.records
-  let totalAmount = calcTotal(records)
-  res.render('index', { records, totalAmount })
 })
 
 function calcTotal(records) {
