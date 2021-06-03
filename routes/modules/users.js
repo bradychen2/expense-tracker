@@ -18,9 +18,10 @@ router.get('/register', (req, res) => {
   res.render('register')
 })
 
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
+
   // Input form check
   if (!name | !email | !password | !confirmPassword) {
     errors.push({ message: '所有欄位都為必填！' })
@@ -35,27 +36,24 @@ router.post('/register', (req, res) => {
       errors
     })
   }
-  // Confirm email is registered or not
-  User.findOne({ email })
-    .then(user => {
-      if (user) {
-        errors.push({ message: '此 Email 已經註冊過！' })
-        return res.render('register', {
-          name,
-          email,
-          errors
-        })
-      } else { // Create new user
-        bcrypt.genSalt(10).then(salt => {
-          return bcrypt.hash(password, salt)
-        }).then(hash => {
-          return User.create({ name, email, password: hash })
-            .then(() => {
-              res.redirect('/users/login')
-            }).catch(err => console.log(err))
-        }).catch(err => console.log(err))
-      }
-    }).catch(err => { console.log(err) })
+
+  try {
+    const user = await User.findOne({ email })
+    // Confirm email is registered or not
+    if (user) {
+      errors.push({ message: '此 Email 已經註冊過！' })
+      return res.render('register', { name, email, errors })
+
+    } else {
+      // Email not exists, create User and redirect
+      const salt = await bcrypt.genSalt(10)
+      const hash = await bcrypt.hash(password, salt)
+      await User.create({ name, email, password: hash })
+      res.redirect('/users/login')
+    }
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 router.get('/logout', (req, res) => {

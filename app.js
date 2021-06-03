@@ -17,7 +17,7 @@ const PORT = process.env.PORT
 
 // Set template engine
 app.engine('hbs', exphbs({
-  helpers: require('./views/handlebarsHelpers'),
+  helpers: require('./public/handlebarsHelpers'),
   defaultLayout: 'main',
   extname: 'hbs'
 }))

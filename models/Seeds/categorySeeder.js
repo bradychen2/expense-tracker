@@ -14,7 +14,7 @@ db.once('open', () => {
     Record.create({
       name: `record-${i}`,
       category: generator.randomCategory(),
-      date: generator.randomDate(new Date('1900-01-01'), new Date('2100-12-31')),
+      date: generator.randomDate(new Date('2020-01-01'), new Date('2021-12-31')),
       amount: generator.randomAmount(10000)
     })
   }

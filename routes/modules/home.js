@@ -3,25 +3,24 @@ const router = express.Router()
 const Record = require('../../models/record')
 
 // Home
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const userId = req.user._id
 
-  return Record.find({ userId })
-    .lean()
-    .sort({ date: 'desc' })
-    .then(records => {
-      let totalAmount = calcTotal(records)
-      req.session.records = records
+  try {
+    const records = await Record.find({ userId }).lean().sort({ date: 'desc' })
 
-      // Clean filter session 
-      req.session.year = ''
-      req.session.month = ''
-      req.session.category = ''
-      const { year, month, category } = req.session
+    let totalAmount = calcTotal(records)
+    req.session.records = records
+    // Clean filter session 
+    req.session.year = ''
+    req.session.month = ''
+    req.session.category = ''
+    const { year, month, category } = req.session
+    res.render('index', { records, totalAmount, year, month, category })
 
-      res.render('index', { records, totalAmount, year, month, category })
-    })
-    .catch(error => console.log(error))
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 // Cancel from edit or new
