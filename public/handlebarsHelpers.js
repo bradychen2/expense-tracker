@@ -104,15 +104,15 @@ Handlebars.registerHelper('judgeCategory', function (recordCategory, currCategor
 
 Handlebars.registerHelper('displayIcon', function (record) {
   if (record.category === 'housing') {
-    return `<i class="fas fa-home fs-1"></i>`
+    return `<i class="fas fa-home fs-1" style="color: ForestGreen;"></i>`
   } else if (record.category === 'transportation') {
-    return `<i class="fas fa-shuttle-van fs-1"></i>`
+    return `<i class="fas fa-shuttle-van fs-1" style="color: Coral;"></i>`
   } else if (record.category === 'entertainment') {
-    return `<i class="fas fa-grin-beam fs-1 mx-1"></i>`
+    return `<i class="fas fa-grin-beam fs-1 mx-1" style="color: RebeccaPurple;"></i>`
   } else if (record.category === 'food') {
-    return `<i class="fas fa-utensils fs-1 mx-1"></i>`
+    return `<i class="fas fa-utensils fs-1 mx-1" style="color: Tomato;"></i>`
   } else {
-    return `<i class="fas fa-pen fs-1 mx-1"></i>`
+    return `<i class="fas fa-pen fs-1 mx-1" style="color: DarkOrchid;"></i>`
   }
 })
 
