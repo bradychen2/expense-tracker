@@ -7,9 +7,10 @@ const flash = require('connect-flash')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-const usePassport = require('./config/passport')
-const routes = require('./routes')
+const passport = require('./config/passport')
+const mainRouters = require('./routes')
 require('./config/mongoose')
+
 
 // Set require const for server
 const app = express()
@@ -26,13 +27,20 @@ app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(flash())
+
+// Session
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
-usePassport(app)
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session())
+
 app.use(express.static('./public'))
+
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
@@ -44,8 +52,11 @@ app.use((req, res, next) => {
   res.locals.category = req.session.category
   next()
 })
-app.use(routes)
 
 app.listen(PORT, () => {
   console.log(`Server is listening on 'http://localhost:${PORT}'`)
 })
+
+mainRouters(app, passport)
+
+module.exports = app

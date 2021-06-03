@@ -1,17 +1,17 @@
 const { check, validationResult } = require('express-validator')
-const Record = require('../../models/record')
+const Record = require('../models/record')
 const helpers = require('../public/helperFunctions')
 const recordSchema = Record.schema
 
 const recordController = {
   // Get all records
-  getRecords: (req, res) => {
+  getRecords: async (req, res) => {
     const userId = req.user._id
 
     try {
       const records = await Record.find({ userId }).lean().sort({ date: 'desc' })
 
-      let totalAmount = calcTotal(records)
+      let totalAmount = helpers.calcTotal(records)
       req.session.records = records
       // Clean filter session 
       req.session.year = ''

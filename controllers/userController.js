@@ -1,6 +1,6 @@
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
-const User = require('../../models/user')
+const User = require('../models/user')
 
 const userController = {
   signInPage: (req, res) => {
