@@ -34,10 +34,15 @@ module.exports = (app, passport) => {
 
   // -------------------Record-------------------
   app.get('/', authenticator, recordController.getRecords)
-  app.get('/back', authenticator, (req, res) => {
-    const records = req.session.records
-    let totalAmount = helpers.calcTotal(records)
-    res.render('index', { records, totalAmount })
+  app.get('/back', authenticator, (req, res, next) => {
+    try {
+      const records = req.session.records
+      let totalAmount = helpers.calcTotal(records)
+      res.render('index', { records, totalAmount })
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   })
   app.get('/records/new', authenticator, recordController.getNew)
   app.post('/records', authenticator, recordController.createRecord)
@@ -45,4 +50,28 @@ module.exports = (app, passport) => {
   app.put('/records/:id', authenticator, recordController.editRecord)
   app.post('/records/filter', authenticator, recordController.filterRecords)
   app.delete('/records/:id', authenticator, recordController.deleteRecord)
+
+  // --------------------Error--------------------
+  // 404 Not Found
+  app.use((req, res, next) => {
+    res.status(404)
+
+    if (req.accepts('json')) {
+      res.json({ error: '404 - Not Found' })
+      return
+    }
+    res.type('text/plain').send('404 - Not Found')
+  })
+
+  // 500 Server Error
+  app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500)
+
+    if (req.accepts('json')) {
+      res.json({ error: '500 - Server Error' })
+      return
+    }
+    res.type('plain/text').send('500 - Server Error')
+  })
 }

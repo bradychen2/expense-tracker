@@ -3,8 +3,13 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/user')
 
 const userController = {
-  signInPage: (req, res) => {
-    res.render('login')
+  signInPage: (req, res, next) => {
+    try {
+      res.render('login')
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   },
 
   signIn: passport.authenticate('local', {
@@ -13,11 +18,16 @@ const userController = {
     failureFlash: true
   }),
 
-  signUpPage: (req, res) => {
-    res.render('register')
+  signUpPage: (req, res, next) => {
+    try {
+      res.render('register')
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   },
 
-  signUp: async (req, res) => {
+  signUp: async (req, res, next) => {
     const { name, email, password, confirmPassword } = req.body
     const errors = []
 
@@ -52,13 +62,19 @@ const userController = {
       }
     } catch (err) {
       console.log(err)
+      next(err)
     }
   },
 
-  signOut: (req, res) => {
-    req.logout()
-    req.flash('success_msg', '你已經成功登出！')
-    res.redirect('/users/login')
+  signOut: (req, res, next) => {
+    try {
+      req.logout()
+      req.flash('success_msg', '你已經成功登出！')
+      res.redirect('/users/login')
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   }
 }
 

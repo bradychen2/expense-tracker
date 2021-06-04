@@ -5,7 +5,7 @@ const recordSchema = Record.schema
 
 const recordController = {
   // Get all records
-  getRecords: async (req, res) => {
+  getRecords: async (req, res, next) => {
     const userId = req.user._id
 
     try {
@@ -22,16 +22,22 @@ const recordController = {
 
     } catch (err) {
       console.log(err)
+      next(err)
     }
   },
 
   // Get create-new page
-  getNew: (req, res) => {
-    res.render('new')
+  getNew: (req, res, next) => {
+    try {
+      return res.render('new')
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
   },
 
   // Create new record
-  createRecord: async (req, res) => {
+  createRecord: async (req, res, next) => {
     const userId = req.user._id
     let record = req.body
     record.userId = userId
@@ -54,14 +60,15 @@ const recordController = {
     } catch (err) {
       if (!errors.isEmpty()) {
         const errorResult = { errors: errors.mapped() }
-        res.render('new', { record, errorResult })
+        return res.render('new', { record, errorResult })
       }
       console.log(err)
+      next(err)
     }
   },
 
   // Get edit page
-  getEdit: async (req, res) => {
+  getEdit: async (req, res, next) => {
     const userId = req.user._id
     const _id = req.params.id
 
@@ -70,10 +77,11 @@ const recordController = {
       res.render('edit', { record })
     } catch (err) {
       console.log(err)
+      next(err)
     }
   },
 
-  editRecord: async (req, res) => {
+  editRecord: async (req, res, next) => {
     const userId = req.user._id
     const _id = req.params.id
     const errors = validationResult(req)
@@ -100,13 +108,14 @@ const recordController = {
       if (!errors.isEmpty()) {
         const errorResult = { errors: errors.mapped() }
         req.body._id = _id
-        res.render('edit', { record: req.body, errorResult })
+        return res.render('edit', { record: req.body, errorResult })
       }
       console.log(err)
+      next(err)
     }
   },
 
-  filterRecords: async (req, res) => {
+  filterRecords: async (req, res, next) => {
     const userId = req.user._id
     const { year, month, category } = req.body
 
@@ -139,10 +148,11 @@ const recordController = {
       res.render('index', { records, totalAmount, year, month, category })
     } catch (err) {
       console.log(err)
+      next(err)
     }
   },
 
-  deleteRecord: async (req, res) => {
+  deleteRecord: async (req, res, next) => {
     const userId = req.user._id
     const _id = req.params.id
 
@@ -162,6 +172,7 @@ const recordController = {
       return res.render('index', { records, totalAmount })
     } catch (err) {
       console.log(err)
+      next(err)
     }
   }
 }
