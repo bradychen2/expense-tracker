@@ -1,3 +1,4 @@
+const validated = require('../public/validation')
 const userController = require('../controllers/userController')
 const recordController = require('../controllers/recordController')
 const helpers = require('../public/helperFunctions')
@@ -40,9 +41,9 @@ module.exports = (app, passport) => {
     res.render('index', { records, totalAmount })
   })
   app.get('/records/new', authenticator, recordController.getNew)
-  app.post('/records', authenticator, recordController.createRecord)
+  app.post('/records', authenticator, validated.checkList, recordController.createRecord)
   app.get('/records/edit/:id', authenticator, recordController.getEdit)
-  app.put('/records/:id', authenticator, recordController.editRecord)
+  app.put('/records/:id', authenticator, validated.checkList, recordController.editRecord)
   app.post('/records/filter', authenticator, recordController.filterRecords)
   app.delete('/records/:id', authenticator, recordController.deleteRecord)
 }
