@@ -1,3 +1,34 @@
+{{!-- Delete Modals --}}
+{{!-- Delete Modal --}}
+{{#each records}}
+<div class="modal fade" id="deleteModal-{{this._id}}" tabindex="-1" aria-labelledby="deleteModalLabel{{this_id}}"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel{{this_id}}" style="font-weight:bold; color: Crimson;">警告</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        資料刪除即<b style="color: Crimson;">無法復原</b>，確認要刪除？
+        <ul>
+          <li><b>名稱: </b>{{this.name}}</li>
+          <li><b>日期: </b>{{formatTime this.date}}</li>
+          <li><b>商家: </b>{{this.merchant}}</li>
+          <li><b>金額: </b>{{this.amount}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回</button>
+        <form action="/records/{{this._id}}/?_method=DELETE" method="POST">
+          <button type="button submit" class="btn btn-danger">刪除</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
+
 <div class="fluid-container row justify-content-center main-container">
   {{!-- Filter --}}
   <form class="d-flex col-10 col-md-6 align-items-center justify-content-evenly mt-3" action="/records/filter"
@@ -57,11 +88,10 @@
             </div>
           </a>
 
-          <div class="button-group">
+          <div class="button-group d-flex align-items-center flex-column-reverse">
             <a class="btn btn-success btn-sm my-1" href="/records/edit/{{this._id}}">修改</a>
-            <form action="/records/{{this._id}}/?_method=DELETE" method="POST">
-              <button class="btn btn-danger btn-sm my-1">刪除</button>
-            </form>
+            <button class="btn btn-danger btn-sm my-1" data-bs-toggle="modal"
+              data-bs-target="#deleteModal-{{this._id}}">刪除</button>
           </div>
 
         </li>
