@@ -1,4 +1,4 @@
-const { check, validationResult } = require('express-validator')
+const validated = require('../public/validation')
 const Record = require('../models/record')
 const helpers = require('../public/helperFunctions')
 const recordSchema = Record.schema
@@ -41,7 +41,7 @@ const recordController = {
     const userId = req.user._id
     let record = req.body
     record.userId = userId
-    const errors = validationResult(req)
+    const errors = validated.validationResult(req)
 
     try {
       // In order to add new record into session
@@ -84,7 +84,7 @@ const recordController = {
   editRecord: async (req, res, next) => {
     const userId = req.user._id
     const _id = req.params.id
-    const errors = validationResult(req)
+    const errors = validated.validationResult(req)
 
     try {
       // Assign req.body to record and save

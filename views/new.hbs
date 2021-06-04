@@ -41,7 +41,8 @@
       <label class="col-form-label mx-0" for="inputGroupSelect">類別*:</label>
       <div class="mx-3 w-50">
         <select class="form-select" name="category" id="inputGroupSelect">
-          <option selected>
+          {{!-- must not neglect value attribute or validator cannot catch errors --}}
+          <option selected value="">
             Selected
           </option>
           <option {{#if record.category}}{{judgeCategory record.category "housing" }}{{/if}} value="housing">
