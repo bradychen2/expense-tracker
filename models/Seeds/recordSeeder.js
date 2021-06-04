@@ -31,6 +31,7 @@ db.once('open', async () => {
         category: generator.randomCategory(),
         date: generator.randomDate(new Date('2020-01-01'), new Date('2021-12-31')),
         amount: generator.randomAmount(10000),
+        merchant: `merchant-${i}`,
         userId
       })
     }
